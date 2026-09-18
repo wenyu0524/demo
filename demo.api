@@ -1,0 +1,50 @@
+syntax = "v1"
+
+info (
+	title:   "限流Demo API"
+	desc:    "这是一个 PeriodLimiter 和 TokenLimiter 的Demo API"
+	version: "1.0.0"
+)
+
+type (
+	// 手机接收验证码
+	SendSmsRequest {
+		Phone string `json: "phone"`
+	}
+	SendSmsResponse {
+		Code string `json: "code"`
+	}
+	// 创建订单
+	CreateOrderRequest {
+		UserId    string `json: "userId"`
+		ProductId string `json: "productId"`
+		Quantity  int    `json: "quantity"`
+	}
+	CreateOrderResponse {
+		OrderId string `json: "orderId"`
+		Message string `json: "message"`
+	}
+)
+
+// ========== 手机接收验证码 ==========
+@server (
+	prefix:     /api/v1
+	group:      sendSms
+	middleware: SendSmsLimitMiddleware
+)
+service demo {
+	@handler SendHandler
+	post /sms/send (SendSmsRequest) returns (SendSmsResponse)
+}
+
+// ========== 创建订单 ==========
+@server (
+	prefix:     /api/v1
+	group:      order
+	middleware: OrderLimitMiddleware
+)
+service demo {
+	@handler CreateOrdersHandler
+	post /orders (CreateOrderRequest) returns (CreateOrderResponse)
+}
+

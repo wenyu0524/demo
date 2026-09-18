@@ -1,0 +1,29 @@
+# IDE
+.idea/
+.vscode/
+
+# Go
+*.exe
+*.test
+*.out
+
+# Go build
+bin/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.*
+
+# Temporary
+tmp/
+temp/
+
+# 文件
+docs

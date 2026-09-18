@@ -1,0 +1,21 @@
+Name: demo
+Host: 127.0.0.1
+Port: 8887
+
+# ==============限流配置==============
+RateLimit:
+  OrdersRate: 100   # 每秒允许的创建订单数量
+  OrdersBurst: 200  # 允许的最大创建订单数量
+  SendSmsQuota: 10  # 手机接收验证码每分钟次数
+
+# ==============Redis配置==============
+Redis:
+  Host: 127.0.0.1:6379
+
+# ==============日志配置==============
+Log:
+  ServiceName: demo
+  Mode: console
+  Level: info
+  Encoding: json
+  Compress: false
